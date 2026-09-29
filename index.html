@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>专升本英语 · 主题词汇闪卡</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#EFECE3;
+    --surface:#FFFDF8;
+    --surface-2:#F4F0E6;
+    --ink:#30323A;
+    --ink-soft:#6B6E78;
+    --ink-faint:#9A9DA6;
+    --line:#DED9CC;
+    --teal:#1F7A6B;
+    --teal-soft:#D6E7E1;
+    --amber:#E07B39;
+    --amber-soft:#F6E2D2;
+    --red:#C9503E;
+    --red-soft:#F5DDD8;
+    --green:#4A9A6E;
+    --green-soft:#DFEBE2;
+    --shadow:0 18px 50px -18px rgba(48,50,58,.35);
+    --shadow-sm:0 10px 24px -12px rgba(48,50,58,.28);
+    --radius:22px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--teal-soft)}
+  .hidden{display:none!important}
+
+  /* ===== 顶部标题 ===== */
+  header{
+    max-width:760px;margin:0 auto;padding:40px 24px 6px;
+    text-align:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;letter-spacing:.18em;font-weight:500;color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+  .eyebrow::before,.eyebrow::after{content:"";width:22px;height:1px;background:var(--line)}
+  h1{
+    font-family:"Noto Serif SC","Songti SC",serif;
+    font-weight:900;font-size:clamp(26px,5.5vw,40px);
+    line-height:1.15;margin-top:12px;letter-spacing:.02em;
+  }
+  h1 em{font-style:normal;color:var(--teal)}
+  .sub{margin-top:8px;color:var(--ink-soft);font-size:14px;line-height:1.6}
+
+  /* ===== 今日学习横条 ===== */
+  .today-strip{
+    max-width:760px;margin:22px auto 0;padding:14px 22px;
+    background:var(--surface);border:1px solid var(--line);border-radius:16px;
+    display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  }
+  .ts-title{font-weight:700;font-size:14px;display:flex;align-items:center;gap:7px;white-space:nowrap}
+  .ts-title::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--teal)}
+  .ts-stats{display:flex;gap:22px;font-size:11px;color:var(--ink-soft)}
+  .ts-stats b{font-size:20px;color:var(--ink);display:block;font-variant-numeric:tabular-nums}
+  .bars{flex:1;min-width:150px;display:flex;align-items:flex-end;gap:5px;height:32px}
+  .bars .day{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .bars .col{width:100%;max-width:24px;background:var(--teal-soft);border-radius:4px 4px 0 0;transition:height .4s ease}
+  .bars .day.today .col{background:var(--teal)}
+  .bars .w{font-size:10px;color:var(--ink-faint)}
+
+  /* ===== 每日复习卡片 ===== */
+  .review-card{
+    max-width:760px;margin:16px auto 0;padding:16px 22px;
+    display:flex;align-items:center;gap:14px;
+    background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  }
+  .review-card .rc-icon{font-size:26px;flex:none}
+  .rc-info{flex:1}
+  .rc-title{font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
+  .rc-title .badge{font-size:11px;font-weight:600;color:var(--amber);background:var(--amber-soft);padding:1px 8px;border-radius:6px}
+  .rc-sub{font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .btn.small{margin-top:0;padding:9px 18px;font-size:13px;flex:none}
+
+  /* ===== 选词视图 ===== */
+  .group-bar{
+    max-width:760px;margin:24px auto 0;padding:0 24px;
+    display:flex;justify-content:center;gap:10px;
+  }
+  .gtab{
+    flex:1;max-width:230px;padding:12px 16px;border-radius:14px;
+    background:var(--surface);border:1px solid var(--line);
+    font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--ink-soft);
+    transition:all .18s ease;display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .gtab .cnt{font-size:12px;font-weight:500;opacity:.7}
+  .gtab:hover{border-color:var(--teal);color:var(--teal)}
+  .gtab.active{background:var(--ink);border-color:var(--ink);color:#fff}
+  .gtab.active .cnt{opacity:.85}
+
+  .grid-note{
+    max-width:760px;margin:16px auto 0;padding:0 24px;
+    font-size:13px;color:var(--ink-faint);
+  }
+  .cat-grid{
+    max-width:760px;margin:14px auto 0;padding:0 24px 8px;
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:14px;
+  }
+  .tcard{
+    border:none;cursor:pointer;text-align:left;font-family:inherit;
+    background:var(--surface);border:1px solid var(--line);border-radius:18px;
+    padding:16px 15px;display:flex;flex-direction:column;gap:10px;
+    position:relative;overflow:hidden;transition:all .18s ease;
+  }
+  .tcard::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--c)}
+  .tcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm);border-color:var(--c)}
+  .tcard:active{transform:translateY(-1px)}
+  .tcard-icon{width:42px;height:42px;border-radius:12px;background:var(--soft,#D6E7E1);display:flex;align-items:center;justify-content:center;font-size:23px}
+  .tcard-name{font-size:15px;font-weight:700;line-height:1.3;padding-right:46px}
+  .tcard-num{font-size:12px;color:var(--ink-soft)}
+  /* 已学进度环 */
+  .ring{position:absolute;top:13px;right:13px;width:40px;height:40px}
+  .ring circle{fill:none;stroke-width:3.5}
+  .ring .ring-bg{stroke:var(--line)}
+  .ring .ring-fg{stroke:var(--c);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset .4s ease}
+  .ring-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:700;color:var(--ink)}
+
+  /* ===== 刷词视图 ===== */
+  .study-head{
+    max-width:470px;margin:22px auto 14px;padding:0 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .back{
+    border:1px solid var(--line);background:var(--surface);border-radius:11px;
+    padding:8px 15px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;color:var(--ink-soft);
+    transition:all .15s ease;white-space:nowrap;
+  }
+  .back:hover{border-color:var(--teal);color:var(--teal)}
+  .study-cat{font-weight:700;font-size:15px}
+  .study-count{font-size:13px;color:var(--ink-soft);white-space:nowrap}
+  .study-count b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .study-inner{max-width:470px;margin:0 auto;padding:0 24px}
+  .bar{height:5px;border-radius:3px;background:var(--line);overflow:hidden;margin-bottom:18px}
+  .bar i{display:block;height:100%;width:0;background:var(--teal);border-radius:3px;transition:width .3s ease}
+
+  /* ===== 卡片 ===== */
+  .stage{perspective:1400px}
+  .card{
+    position:relative;width:100%;aspect-ratio:10/12;max-height:56vh;
+    transform-style:preserve-3d;cursor:pointer;transition:transform .55s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flip{transform:rotateY(180deg)}
+  .face{
+    position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border-radius:var(--radius);background:var(--surface);
+    box-shadow:var(--shadow);border:1px solid var(--line);
+    display:flex;flex-direction:column;
+    padding:24px 22px 22px;
+  }
+  .face .tag{
+    font-size:12px;letter-spacing:.06em;color:var(--ink-faint);font-weight:500;
+    display:flex;align-items:center;gap:8px;
+  }
+  .face .tag::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c,var(--teal))}
+  .face .prompt{margin-top:auto;color:var(--ink-faint);font-size:12px;text-align:center}
+  .face .prompt .key{display:inline-block;padding:1px 7px;border:1px solid var(--line);border-radius:5px;font-size:11px;margin:0 2px}
+  .speak{
+    position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s ease;
+  }
+  .speak:hover{background:var(--c-soft,var(--teal-soft));border-color:var(--c,var(--teal));color:var(--c,var(--teal));transform:scale(1.06)}
+  .speak svg{width:19px;height:19px}
+  .back .speak{transform:rotateY(180deg)}
+  .back .speak:hover{transform:rotateY(180deg) scale(1.06)}
+  /* 正面 */
+  .front .big{text-align:center;margin:auto;font-weight:700;font-size:clamp(26px,6.5vw,44px);letter-spacing:.01em;line-height:1.2;word-break:break-word}
+  .front .big small{display:block;font-size:.42em;font-weight:500;color:var(--ink-soft);margin-top:10px}
+  /* 背面 */
+  .back{transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center;gap:0}
+  .back .word{font-family:"Noto Serif SC",serif;font-weight:700;font-size:clamp(20px,4.5vw,30px);word-break:break-word}
+  .back .ipa{margin-top:10px;font-size:14px;color:var(--teal);letter-spacing:.03em}
+  .back .mean{margin-top:14px;font-size:17px;font-weight:500;line-height:1.5}
+  .back .mean .pos{display:inline-block;background:var(--c-soft,var(--teal-soft));color:var(--c,var(--teal));font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;margin-right:6px;vertical-align:2px}
+  .back .extra{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line);width:100%;font-size:14px;color:var(--ink-soft);line-height:1.7}
+  .back .extra b{color:var(--ink);font-weight:600}
+
+  /* ===== 操作 ===== */
+  .controls{margin-top:22px}
+  .auto-tgl{border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:7px 12px;font-size:12px;font-weight:600;font-family:inherit;color:var(--ink-soft);cursor:pointer;transition:all .15s ease;white-space:nowrap}
+  .auto-tgl.on{background:var(--teal-soft);border-color:var(--teal);color:var(--teal)}
+  .hint{text-align:center;font-size:13px;color:var(--ink-faint);margin-bottom:14px}
+  .rating{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;visibility:hidden;opacity:0;transition:opacity .2s ease}
+  .rating.show{visibility:visible;opacity:1}
+  .rate{border:none;border-radius:14px;padding:15px 8px;font-size:14px;font-weight:600;cursor:pointer;transition:transform .15s ease;font-family:inherit;color:var(--ink)}
+  .rate:hover{transform:translateY(-2px)}
+  .rate .sub{display:block;font-size:11px;font-weight:400;color:inherit;opacity:.7;margin-top:3px}
+  .rate.again{background:var(--red-soft)}
+  .rate.hard{background:var(--amber-soft)}
+  .rate.good{background:var(--green-soft)}
+  .rate.again:hover{background:#EFC9C3}
+  .rate.hard:hover{background:#EECBB0}
+  .rate.good:hover{background:#C9DECF}
+
+  /* ===== 完成态 ===== */
+  .done{display:none;text-align:center;padding:56px 20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .done.show{display:block}
+  .done .tick{font-family:"Noto Serif SC",serif;font-size:52px;color:var(--teal);font-weight:700;line-height:1}
+  .done h2{margin-top:14px;font-family:"Noto Serif SC",serif;font-size:26px}
+  .done p{margin-top:8px;color:var(--ink-soft);font-size:14px}
+  .done .stat{display:flex;justify-content:center;gap:40px;margin:26px 0 6px;font-size:13px;color:var(--ink-soft)}
+  .done .stat b{display:block;font-size:30px;color:var(--ink);font-variant-numeric:tabular-nums}
+  .btn{
+    margin-top:22px;border:none;cursor:pointer;font-family:inherit;
+    background:var(--ink);color:#fff;border-radius:12px;padding:13px 26px;font-size:15px;font-weight:600;
+    transition:transform .15s ease,opacity .15s;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);margin-left:10px}
+  .btn.ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+  /* ===== 词性小抄 ===== */
+  .cheat{max-width:760px;margin:32px auto 56px;padding:0 24px}
+  details{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  summary{cursor:pointer;padding:16px 20px;font-weight:600;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"＋";font-size:18px;color:var(--ink-soft)}
+  details[open] summary::after{content:"－"}
+  .cheat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;padding:4px 20px 18px}
+  .abbr{display:flex;align-items:baseline;gap:8px;padding:7px 10px;border-radius:8px;background:var(--surface-2);font-size:13px}
+  .abbr .code{font-weight:700;color:var(--teal);white-space:nowrap}
+  .abbr span{color:var(--ink-soft)}
+
+  footer{text-align:center;padding:0 24px 44px;font-size:12px;color:var(--ink-faint)}
+
+  @media(max-width:480px){
+    .face{padding:26px 20px 22px}
+    .rating{gap:8px}
+    .rate{font-size:13px;padding:13px 4px}
+    .group-bar{padding:0 18px}
+    .today-strip{gap:16px}
+    .ts-stats{gap:14px}
+    .cat-grid{grid-template-columns:repeat(2,1fr);padding:0 18px}
+    .grid-note,.group-bar{padding:0 18px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">专升本英语 · 高频词汇</div>
+  <h1>主题词汇 <em>记忆闪卡</em></h1>
+  <p class="sub">选一个主题开始刷 · 点卡片翻面 · 认识的放行、不认识的回头再学</p>
+</header>
+
+<!-- ===== 选词视图 ===== -->
+<section class="view" id="viewPicker">
+  <div class="today-strip">
+    <span class="ts-title">今日学习</span>
+    <div class="ts-stats">
+      <span>已复习 <b id="dRev">0</b></span>
+      <span>已掌握 <b id="dMast">0</b></span>
+      <span>待复习 <b id="dLeft">0</b></span>
+    </div>
+    <div class="bars" id="bars"></div>
+  </div>
+
+  <div class="review-card" id="reviewCard">
+    <span class="rc-icon">🧠</span>
+    <div class="rc-info">
+      <div class="rc-title">每日复习 · 艾宾浩斯<span class="badge" id="reviewBadge">0 词</span></div>
+      <div class="rc-sub" id="reviewSub">今天没有需要复习的单词</div>
+    </div>
+    <button class="btn small" id="reviewBtn">开始复习</button>
+  </div>
+
+  <div class="group-bar" id="groupBar"></div>
+  <div class="grid-note" id="gridNote">选择一组开始刷词</div>
+  <div class="cat-grid" id="catGrid"></div>
+
+  <section class="cheat">
+    <details>
+      <summary>词性缩写小抄（n. / v. / adj. …）</summary>
+      <div class="cheat-grid">
+        <div class="abbr"><span class="code">n.</span><span>名词</span></div>
+        <div class="abbr"><span class="code">v.</span><span>动词</span></div>
+        <div class="abbr"><span class="code">vi.</span><span>不及物动词</span></div>
+        <div class="abbr"><span class="code">vt.</span><span>及物动词</span></div>
+        <div class="abbr"><span class="code">adj.</span><span>形容词</span></div>
+        <div class="abbr"><span class="code">adv.</span><span>副词</span></div>
+        <div class="abbr"><span class="code">prep.</span><span>介词</span></div>
+        <div class="abbr"><span class="code">conj.</span><span>连词</span></div>
+        <div class="abbr"><span class="code">pron.</span><span>代词</span></div>
+        <div class="abbr"><span class="code">num.</span><span>数词</span></div>
+        <div class="abbr"><span class="code">modal&nbsp;v.</span><span>情态动词</span></div>
+        <div class="abbr"><span class="code">短语</span><span>固定搭配</span></div>
+      </div>
+    </details>
+  </section>
+</section>
+
+<!-- ===== 刷词视图 ===== -->
+<section class="view hidden" id="viewStudy">
+  <div class="study-head">
+    <button class="back" id="backBtn">← 返回词库</button>
+    <span class="study-cat" id="catLabel">—</span>
+    <button class="auto-tgl on" id="autoTgl" title="自动朗读开关">🔊 自动读</button>
+    <span class="study-count"><b id="progressText">0 / 0</b> · 待学 <b id="remain">0</b></span>
+  </div>
+  <div class="study-inner">
+    <div class="bar"><i id="prog"></i></div>
+    <div class="stage" id="stage">
+      <div class="card" id="card" tabindex="0" role="button" aria-label="点击翻面">
+        <div class="face front">
+          <button class="speak" id="speakFront" aria-label="朗读" title="朗读"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
+          <div class="tag" id="frontTag">月份</div>
+          <div class="big" id="frontWord">—</div>
+          <div class="prompt">点击卡片或按 <span class="key">空格</span> 翻面</div>
+        </div>
+        <div class="face back">
+          <button class="speak" id="speakBack" aria-label="朗读" title="朗读"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
+          <div class="tag" id="backTag">月份</div>
+          <div class="word" id="backWord">—</div>
+          <div class="ipa" id="backIpa">/—/</div>
+          <div class="mean" id="backMean">—</div>
+          <div class="extra" id="backExtra"></div>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="hint" id="ctrlHint">翻面后，用 <b>1/2/3</b> 或按钮评分</div>
+      <div class="rating" id="rating">
+        <button class="rate again" data-v="again"><span>不认识</span><span class="sub">忘记了 · 回头再学</span></button>
+        <button class="rate hard" data-v="hard"><span>模糊</span><span class="sub">有点印象 · 回头再学</span></button>
+        <button class="rate good" data-v="good"><span>认识</span><span class="sub">掌握 · 放行</span></button>
+      </div>
+    </div>
+    <div class="done" id="done">
+      <div class="tick">✓</div>
+      <h2>本组复习完成</h2>
+      <p>做得很棒，继续保持。</p>
+      <div class="stat">
+        <span>总卡片<b id="dTotal">0</b></span>
+        <span>一次记住<b id="dOnce">0</b></span>
+        <span>回头再学<b id="dRe">0</b></span>
+      </div>
+      <button class="btn" id="replay">再刷一遍</button>
+      <button class="btn ghost" id="againBest">复习易错</button>
+    </div>
+  </div>
+</section>
+
+<footer>专升本英语高频主题词（基础 7 组 + 真题核心 24 组）· 本地学习工具，无需联网</footer>
+
+<script>
+/* ============ 数据：31 大主题 ============ */
+const CATS = [
+  /* ---- 基础词汇（7 组） ---- */
+  { id:"months", group:"base", name:"月份", color:"#1F7A6B", soft:"#D6E7E1", cards:[
+    ["January","/ˈdʒænjuəri/","n.","一月"],
+    ["February","/ˈfebruəri/","n.","二月"],
+    ["March","/mɑːtʃ/","n.","三月"],
+    ["April","/ˈeɪprəl/","n.","四月"],
+    ["May","/meɪ/","n.","五月"],
+    ["June","/dʒuːn/","n.","六月"],
+    ["July","/dʒuˈlaɪ/","n.","七月"],
+    ["August","/ˈɔːɡəst/","n.","八月"],
+    ["September","/sepˈtembə/","n.","九月"],
+    ["October","/ɒkˈtəʊbə/","n.","十月"],
+    ["November","/nəʊˈvembə/","n.","十一月"],
+    ["December","/dɪˈsembə/","n.","十二月"],
+  ]},
+  { id:"cardinal", group:"base", name:"数字·基数词", color:"#D9803C", soft:"#F6E2D2", cards:[
+    ["one","/wʌn/","num.","1"],
+    ["two","/tuː/","num.","2"],
+    ["three","/θriː/","num.","3"],
+    ["four","/fɔː/","num.","4"],
+    ["five","/faɪv/","num.","5"],
+    ["six","/sɪks/","num.","6"],
+    ["seven","/ˈsevən/","num.","7"],
+    ["eight","/eɪt/","num.","8"],
+    ["nine","/naɪn/","num.","9"],
+    ["ten","/ten/","num.","10"],
+    ["eleven","/ɪˈlevn/","num.","11"],
+    ["twelve","/twelv/","num.","12"],
+    ["thirteen","/ˌθɜːˈtiːn/","num.","13"],
+    ["fourteen","/ˌfɔːˈtiːn/","num.","14"],
+    ["fifteen","/ˌfɪfˈtiːn/","num.","15"],
+    ["sixteen","/ˌsɪksˈtiːn/","num.","16"],
+    ["seventeen","/ˌsevənˈtiːn/","num.","17"],
+    ["eighteen","/ˌeɪˈtiːn/","num.","18"],
+    ["nineteen","/ˌnaɪnˈtiːn/","num.","19"],
+    ["twenty","/ˈtwenti/","num.","20"],
+    ["thirty","/ˈθɜːti/","num.","30"],
+    ["forty","/ˈfɔːti/","num.","40"],
+    ["fifty","/ˈfɪfti/","num.","50"],
+    ["sixty","/ˈsɪksti/","num.","60"],
+    ["seventy","/ˈsevnti/","num.","70"],
+    ["eighty","/ˈeɪti/","num.","80"],
+    ["ninety","/ˈnaɪnti/","num.","90"],
+    ["one hundred","/wʌn ˈhʌndrəd/","num.","100"],
+    ["one thousand","/wʌn ˈθaʊzənd/","num.","1000"],
+  ]},
+  { id:"ordinal", group:"base", name:"数字·序数词", color:"#5B6FA3", soft:"#DDE3F0", cards:[
+    ["first","/fɜːst/","num.","第一"],
+    ["second","/ˈsekənd/","num.","第二"],
+    ["third","/θɜːd/","num.","第三"],
+    ["fourth","/fɔːθ/","num.","第四"],
+    ["fifth","/fɪfθ/","num.","第五"],
+    ["sixth","/sɪksθ/","num.","第六"],
+    ["seventh","/ˈsevənθ/","num.","第七"],
+    ["eighth","/eɪtθ/","num.","第八"],
+    ["ninth","/naɪnθ/","num.","第九"],
+    ["tenth","/tenθ/","num.","第十"],
+    ["twentieth","/ˈtwentiəθ/","num.","第二十"],
+    ["thirtieth","/ˈθɜːtiəθ/","num.","第三十"],
+  ]},
+  { id:"countries", group:"base", name:"国家与国民", color:"#8A5F9E", soft:"#E6DCEB", cards:[
+    ["China","/ˈtʃaɪnə/","n.","中国","Chinese","/ˌtʃaɪˈniːz/","中国人 / 中国的"],
+    ["Japan","/dʒəˈpæn/","n.","日本","Japanese","/ˌdʒæpəˈniːz/","日本人 / 日本的"],
+    ["France","/frɑːns/","n.","法国","French","/frentʃ/","法国人 / 法国的"],
+    ["Germany","/ˈdʒɜːməni/","n.","德国","German","/ˈdʒɜːmən/","德国人 / 德国的"],
+    ["Britain / the UK","/ˈbrɪtn/","n.","英国","British","/ˈbrɪtɪʃ/","英国人 / 英国的"],
+    ["America / the US","/əˈmerɪkə/","n.","美国","American","/əˈmerɪkən/","美国人 / 美国的"],
+    ["Canada","/ˈkænədə/","n.","加拿大","Canadian","/kəˈneɪdiən/","加拿大人 / 加拿大的"],
+    ["Australia","/ɒˈstreɪliə/","n.","澳大利亚","Australian","/ɒˈstreɪliən/","澳大利亚人 / 澳大利亚的"],
+    ["Russia","/ˈrʌʃə/","n.","俄罗斯","Russian","/ˈrʌʃn/","俄罗斯人 / 俄罗斯的"],
+    ["Italy","/ˈɪtəli/","n.","意大利","Italian","/ɪˈtæliən/","意大利人 / 意大利的"],
+    ["Spain","/speɪn/","n.","西班牙","Spanish","/ˈspænɪʃ/","西班牙人 / 西班牙的"],
+  ]},
+  { id:"weekdays", group:"base", name:"星期", color:"#2E86A8", soft:"#D6E7EF", cards:[
+    ["Monday","/ˈmʌndeɪ/","n.","星期一"],
+    ["Tuesday","/ˈtjuːzdeɪ/","n.","星期二"],
+    ["Wednesday","/ˈwenzdeɪ/","n.","星期三"],
+    ["Thursday","/ˈθɜːzdeɪ/","n.","星期四"],
+    ["Friday","/ˈfraɪdeɪ/","n.","星期五"],
+    ["Saturday","/ˈsætədeɪ/","n.","星期六"],
+    ["Sunday","/ˈsʌndeɪ/","n.","星期日"],
+  ]},
+  { id:"seasons", group:"base", name:"季节", color:"#4A9A6E", soft:"#DFEBE2", cards:[
+    ["spring","/sprɪŋ/","n.","春天"],
+    ["summer","/ˈsʌmə/","n.","夏天"],
+    ["autumn / fall","/ˈɔːtəm/ /fɔːl/","n.","秋天"],
+    ["winter","/ˈwɪntə/","n.","冬天"],
+  ]},
+  { id:"festivals", group:"base", name:"节日", color:"#C9503E", soft:"#F5DDD8", cards:[
+    ["Spring Festival","/sprɪŋ ˈfestɪvl/","n.","春节"],
+    ["Mid-Autumn Festival","/mɪd ˈɔːtəm ˈfestɪvl/","n.","中秋节"],
+    ["Christmas","/ˈkrɪsməs/","n.","圣诞节"],
+    ["Thanksgiving","/ˌθæŋksˈɡɪvɪŋ/","n.","感恩节"],
+  ]},
+
+  /* ---- 真题核心词汇（24 组） ---- */
+  { id:"education", group:"core", name:"教育", color:"#3A6EA5", soft:"#DCE6F2", cards:[
+    ["education","/ˌedʒuˈkeɪʃn/","n.","教育"],
+    ["educate","/ˈedʒukeɪt/","v.","教育"],
+    ["student","/ˈstjuːdənt/","n.","学生"],
+    ["teacher","/ˈtiːtʃə/","n.","老师"],
+    ["college","/ˈkɒlɪdʒ/","n.","学院；专科院校"],
+    ["university","/ˌjuːnɪˈvɜːsəti/","n.","综合性大学"],
+    ["major","/ˈmeɪdʒə/","n.","专业；adj. 主要的"],
+    ["course","/kɔːs/","n.","课程"],
+    ["exam","/ɪɡˈzæm/","n.","考试"],
+    ["degree","/dɪˈɡriː/","n.","学位；程度"],
+    ["knowledge","/ˈnɒlɪdʒ/","n.","知识"],
+    ["skill","/skɪl/","n.","技能"],
+    ["effort","/ˈefət/","n.","努力"],
+    ["challenge","/ˈtʃælɪndʒ/","n.","挑战；v. 质疑"],
+    ["campus","/ˈkæmpəs/","n.","校园"],
+    ["lecture","/ˈlektʃə/","n.","讲座；授课"],
+    ["scholarship","/ˈskɒləʃɪp/","n.","奖学金"],
+    ["graduate","/ˈɡrædʒuət/","v.","毕业；n. 毕业生"],
+    ["postgraduate","/ˌpəʊstˈɡrædʒuət/","n.","研究生"],
+    ["tuition","/tjuːˈɪʃn/","n.","学费"],
+  ]},
+  { id:"environment", group:"core", name:"环境", color:"#3E8E5A", soft:"#DDEBDD", cards:[
+    ["environment","/ɪnˈvaɪrənmənt/","n.","环境"],
+    ["pollution","/pəˈluːʃn/","n.","污染"],
+    ["protect","/prəˈtekt/","v.","保护"],
+    ["recycle","/ˌriːˈsaɪkl/","v.","回收；循环利用"],
+    ["energy","/ˈenədʒi/","n.","能源；能量"],
+    ["forest","/ˈfɒrɪst/","n.","森林"],
+    ["ocean","/ˈəʊʃn/","n.","海洋"],
+    ["climate","/ˈklaɪmət/","n.","气候"],
+    ["waste","/weɪst/","n.","垃圾；v. 浪费"],
+    ["plastic","/ˈplæstɪk/","n.","塑料；adj. 塑料的"],
+    ["carbon","/ˈkɑːbən/","n.","碳"],
+    ["emission","/ɪˈmɪʃn/","n.","排放"],
+    ["sustainable","/səˈsteɪnəbl/","adj.","可持续的"],
+    ["conservation","/ˌkɒnsəˈveɪʃn/","n.","保护；节约"],
+  ]},
+  { id:"health", group:"core", name:"健康", color:"#C2586B", soft:"#F2DCE1", cards:[
+    ["health","/helθ/","n.","健康"],
+    ["healthy","/ˈhelθi/","adj.","健康的"],
+    ["disease","/dɪˈziːz/","n.","疾病"],
+    ["exercise","/ˈeksəsaɪz/","n./v.","锻炼；运动"],
+    ["diet","/ˈdaɪət/","n.","日常饮食；节食"],
+    ["sleep","/sliːp/","n./v.","睡眠；睡觉"],
+    ["mental","/ˈmentl/","adj.","心理的；精神的"],
+    ["stress","/stres/","n.","压力；v. 强调"],
+    ["depression","/dɪˈpreʃn/","n.","抑郁；低落"],
+    ["anxiety","/æŋˈzaɪəti/","n.","焦虑"],
+    ["symptom","/ˈsɪmptəm/","n.","症状"],
+    ["treatment","/ˈtriːtmənt/","n.","治疗；对待"],
+    ["cure","/kjʊə/","v./n.","治愈；解药"],
+    ["nutrition","/njuːˈtrɪʃn/","n.","营养"],
+    ["vitamin","/ˈvɪtəmɪn/","n.","维生素"],
+  ]},
+  { id:"technology", group:"core", name:"科技", color:"#2E86A8", soft:"#D6E7EF", cards:[
+    ["technology","/tekˈnɒlədʒi/","n.","科技；技术"],
+    ["Internet","/ˈɪntənet/","n.","互联网"],
+    ["computer","/kəmˈpjuːtə/","n.","电脑"],
+    ["mobile phone","/ˈməʊbaɪl fəʊn/","n.","手机"],
+    ["information","/ˌɪnfəˈmeɪʃn/","n.","信息"],
+    ["online","/ˌɒnˈlaɪn/","adj./adv.","线上的；在线上"],
+    ["invent","/ɪnˈvent/","v.","发明"],
+    ["develop","/dɪˈveləp/","v.","发展；开发"],
+    ["innovation","/ˌɪnəˈveɪʃn/","n.","创新"],
+    ["artificial intelligence","/ˌɑːtɪˈfɪʃl ɪnˈtelɪdʒəns/","n.","人工智能"],
+    ["data","/ˈdeɪtə/","n.","数据"],
+    ["software","/ˈsɒftweə/","n.","软件"],
+    ["hardware","/ˈhɑːdweə/","n.","硬件"],
+    ["network","/ˈnetwɜːk/","n.","网络"],
+    ["digital","/ˈdɪdʒɪtl/","adj.","数字的；数码的"],
+  ]},
+  { id:"transport", group:"core", name:"交通", color:"#D9803C", soft:"#F6E2D2", cards:[
+    ["transport","/ˈtrænspɔːt/","n.","交通；运输"],
+    ["train","/treɪn/","n.","火车"],
+    ["plane","/pleɪn/","n.","飞机"],
+    ["subway","/ˈsʌbweɪ/","n.","地铁"],
+    ["bus","/bʌs/","n.","公交车"],
+    ["traffic","/ˈtræfɪk/","n.","交通；车流"],
+    ["journey","/ˈdʒɜːni/","n.","旅途；旅行"],
+    ["travel","/ˈtrævl/","v./n.","旅行"],
+    ["trip","/trɪp/","n.","短途旅行"],
+    ["voyage","/ˈvɔɪɪdʒ/","n.","航海；航行"],
+    ["vehicle","/ˈviːəkl/","n.","车辆"],
+    ["highway","/ˈhaɪweɪ/","n.","公路"],
+    ["airport","/ˈeəpɔːt/","n.","机场"],
+    ["station","/ˈsteɪʃn/","n.","车站"],
+    ["delay","/dɪˈleɪ/","v./n.","延误；推迟"],
+  ]},
+  { id:"economy", group:"core", name:"购物与经济", color:"#B98A2F", soft:"#F2E8CE", cards:[
+    ["price","/praɪs/","n.","价格"],
+    ["cost","/kɒst/","v.","花费；n. 成本"],
+    ["income","/ˈɪnkʌm/","n.","收入"],
+    ["budget","/ˈbʌdʒɪt/","n.","预算"],
+    ["market","/ˈmɑːkɪt/","n.","市场"],
+    ["consume","/kənˈsjuːm/","v.","消费"],
+    ["discount","/ˈdɪskaʊnt/","n.","折扣"],
+    ["economy","/ɪˈkɒnəmi/","n.","经济"],
+    ["economic","/ˌiːkəˈnɒmɪk/","adj.","经济的；经济学的"],
+    ["trade","/treɪd/","n./v.","贸易；交易"],
+    ["business","/ˈbɪznəs/","n.","生意；商业"],
+    ["profit","/ˈprɒfɪt/","n.","利润"],
+    ["loss","/lɒs/","n.","亏损；损失"],
+    ["invest","/ɪnˈvest/","v.","投资"],
+    ["savings","/ˈseɪvɪŋz/","n.","存款"],
+  ]},
+  { id:"social", group:"core", name:"社会生活", color:"#7D5B9E", soft:"#E6DCEB", cards:[
+    ["society","/səˈsaɪəti/","n.","社会"],
+    ["social","/ˈsəʊʃl/","adj.","社会的；社交的"],
+    ["citizen","/ˈsɪtɪzn/","n.","公民"],
+    ["community","/kəˈmjuːnəti/","n.","社区"],
+    ["neighbor","/ˈneɪbə/","n.","邻居"],
+    ["volunteer","/ˌvɒlənˈtɪə/","n./v.","志愿者；志愿"],
+    ["service","/ˈsɜːvɪs/","n.","服务"],
+    ["responsibility","/rɪˌspɒnsəˈbɪləti/","n.","责任"],
+    ["duty","/ˈdjuːti/","n.","职责；义务"],
+    ["rule","/ruːl/","n.","规则；v. 统治"],
+    ["custom","/ˈkʌstəm/","n.","习俗"],
+    ["tradition","/trəˈdɪʃn/","n.","传统"],
+    ["culture","/ˈkʌltʃə/","n.","文化"],
+    ["communication","/kəˌmjuːnɪˈkeɪʃn/","n.","交流；沟通"],
+    ["relationship","/rɪˈleɪʃnʃɪp/","n.","关系"],
+    ["friendship","/ˈfrendʃɪp/","n.","友谊"],
+    ["cooperate","/kəʊˈɒpəreɪt/","v.","合作；协作"],
+    ["support","/səˈpɔːt/","v./n.","支持"],
+    ["respect","/rɪˈspekt/","v./n.","尊重"],
+    ["trust","/trʌst/","v./n.","信任"],
+    ["lonely","/ˈləʊnli/","adj.","孤独的"],
+    ["alone","/əˈləʊn/","adj.","独自的；单独的"],
+  ]},
+  { id:"job", group:"core", name:"工作与职业", color:"#4A5F8A", soft:"#DDE2ED", cards:[
+    ["career","/kəˈrɪə/","n.","职业；生涯"],
+    ["occupation","/ˌɒkjuˈpeɪʃn/","n.","职业；消遣"],
+    ["job","/dʒɒb/","n.","工作"],
+    ["work","/wɜːk/","n./v.","工作；劳动"],
+    ["employ","/ɪmˈplɔɪ/","v.","雇佣"],
+    ["employee","/ɪmˌplɔɪˈiː/","n.","雇员"],
+    ["employer","/ɪmˈplɔɪə/","n.","雇主"],
+    ["manager","/ˈmænɪdʒə/","n.","经理"],
+    ["boss","/bɒs/","n.","老板"],
+    ["colleague","/ˈkɒliːɡ/","n.","同事"],
+    ["position","/pəˈzɪʃn/","n.","职位；位置"],
+    ["salary","/ˈsæləri/","n.","薪水"],
+    ["wage","/weɪdʒ/","n.","工资"],
+    ["interview","/ˈɪntəvjuː/","n./v.","面试；采访"],
+    ["apply","/əˈplaɪ/","v.","申请；应用"],
+    ["application","/ˌæplɪˈkeɪʃn/","n.","申请书；应用"],
+    ["resume","/ˈrezəmeɪ/","n.","简历"],
+    ["promote","/prəˈməʊt/","v.","晋升；促进"],
+    ["retire","/rɪˈtaɪə/","v.","退休"],
+    ["task","/tɑːsk/","n.","任务"],
+    ["opportunity","/ˌɒpəˈtjuːnəti/","n.","机会"],
+  ]},
+  { id:"city", group:"core", name:"城市与建筑", color:"#8A6A4F", soft:"#ECE1D6", cards:[
+    ["city","/ˈsɪti/","n.","城市"],
+    ["town","/taʊn/","n.","城镇"],
+    ["village","/ˈvɪlɪdʒ/","n.","村庄"],
+    ["capital","/ˈkæpɪtl/","n.","首都；省会"],
+    ["street","/striːt/","n.","街道"],
+    ["road","/rəʊd/","n.","马路"],
+    ["building","/ˈbɪldɪŋ/","n.","建筑物"],
+    ["apartment","/əˈpɑːtmənt/","n.","公寓"],
+    ["house","/haʊs/","n.","房子"],
+    ["library","/ˈlaɪbrəri/","n.","图书馆"],
+    ["museum","/mjuːˈziːəm/","n.","博物馆"],
+    ["hospital","/ˈhɒspɪtl/","n.","医院"],
+    ["bank","/bæŋk/","n.","银行"],
+    ["restaurant","/ˈrestərɒnt/","n.","餐馆"],
+    ["shop / store","/ʃɒp/ /stɔː/","n.","商店"],
+    ["park","/pɑːk/","n.","公园"],
+    ["station","/ˈsteɪʃn/","n.","车站"],
+    ["cinema","/ˈsɪnəmə/","n.","电影院"],
+    ["theater","/ˈθɪətə/","n.","剧院"],
+  ]},
+  { id:"animal", group:"core", name:"动物与植物", color:"#5B8A4A", soft:"#E0EBD8", cards:[
+    ["animal","/ˈænɪml/","n.","动物"],
+    ["pet","/pet/","n.","宠物"],
+    ["wild","/waɪld/","adj.","野生的；野蛮的"],
+    ["wildlife","/ˈwaɪldlaɪf/","n.","野生动物"],
+    ["plant","/plɑːnt/","n.","植物；v. 种植"],
+    ["tree","/triː/","n.","树"],
+    ["flower","/ˈflaʊə/","n.","花"],
+    ["grass","/ɡrɑːs/","n.","草"],
+    ["forest","/ˈfɒrɪst/","n.","森林"],
+    ["root","/ruːt/","n.","根"],
+    ["leaf","/liːf/","n.","叶子（pl. leaves）"],
+    ["protect","/prəˈtekt/","v.","保护"],
+    ["feed","/fiːd/","v.","喂养；进食"],
+    ["hunt","/hʌnt/","v.","捕猎；狩猎"],
+    ["species","/ˈspiːʃiːz/","n.","物种"],
+    ["endangered","/ɪnˈdeɪndʒəd/","adj.","濒危的"],
+  ]},
+  { id:"food", group:"core", name:"饮食", color:"#C9503E", soft:"#F5DDD8", cards:[
+    ["food","/fuːd/","n.","食物"],
+    ["meal","/miːl/","n.","一餐"],
+    ["breakfast","/ˈbrekfəst/","n.","早餐"],
+    ["lunch","/lʌntʃ/","n.","午餐"],
+    ["dinner","/ˈdɪnə/","n.","晚餐"],
+    ["vegetable","/ˈvedʒtəbl/","n.","蔬菜"],
+    ["fruit","/fruːt/","n.","水果"],
+    ["meat","/miːt/","n.","肉"],
+    ["protein","/ˈprəʊtiːn/","n.","蛋白质"],
+    ["nutrition","/njuːˈtrɪʃn/","n.","营养"],
+    ["taste","/teɪst/","n.","味道；v. 品尝"],
+    ["delicious","/dɪˈlɪʃəs/","adj.","美味的"],
+    ["hungry","/ˈhʌŋɡri/","adj.","饥饿的"],
+    ["thirsty","/ˈθɜːsti/","adj.","口渴的"],
+    ["cook","/kʊk/","v.","烹饪；n. 厨师"],
+    ["diet","/ˈdaɪət/","n.","日常饮食；节食"],
+    ["beverage","/ˈbevərɪdʒ/","n.","饮料"],
+    ["snack","/snæk/","n.","零食"],
+  ]},
+  { id:"sports", group:"core", name:"运动", color:"#2E8A7D", soft:"#D6EAE6", cards:[
+    ["sport","/spɔːt/","n.","运动"],
+    ["exercise","/ˈeksəsaɪz/","n./v.","锻炼；运动"],
+    ["match","/mætʃ/","n.","比赛；匹配"],
+    ["compete","/kəmˈpiːt/","v.","竞争；比赛"],
+    ["competition","/ˌkɒmpəˈtɪʃn/","n.","竞赛；比赛"],
+    ["player","/ˈpleɪə/","n.","运动员；选手"],
+    ["athlete","/ˈæθliːt/","n.","运动员"],
+    ["win","/wɪn/","v.","赢；获胜"],
+    ["lose","/luːz/","v.","输掉；失去"],
+    ["race","/reɪs/","n.","赛跑；比赛"],
+    ["fit","/fɪt/","adj.","健康的；合适的"],
+    ["strong","/strɒŋ/","adj.","强壮的；坚强的"],
+    ["stadium","/ˈsteɪdiəm/","n.","体育场"],
+    ["coach","/kəʊtʃ/","n.","教练"],
+    ["champion","/ˈtʃæmpiən/","n.","冠军"],
+  ]},
+  { id:"media", group:"core", name:"媒体与信息", color:"#5B6FA3", soft:"#DDE3F0", cards:[
+    ["media","/ˈmiːdiə/","n.","媒体"],
+    ["news","/njuːz/","n.","新闻"],
+    ["newspaper","/ˈnjuːzpeɪpə/","n.","报纸"],
+    ["magazine","/ˌmæɡəˈziːn/","n.","杂志"],
+    ["report","/rɪˈpɔːt/","v./n.","报道；报告"],
+    ["message","/ˈmesɪdʒ/","n.","信息；消息"],
+    ["information","/ˌɪnfəˈmeɪʃn/","n.","信息"],
+    ["data","/ˈdeɪtə/","n.","数据"],
+    ["broadcast","/ˈbrɔːdkɑːst/","v./n.","广播；播出"],
+    ["video","/ˈvɪdiəʊ/","n.","视频"],
+    ["website","/ˈwebsaɪt/","n.","网站"],
+    ["social media","/ˈsəʊʃl ˈmiːdiə/","n.","社交媒体"],
+    ["false","/fɔːls/","adj.","虚假的；错误的"],
+    ["true","/truː/","adj.","真实的；正确的"],
+    ["rumor","/ˈruːmə/","n.","谣言"],
+  ]},
+  { id:"opinion", group:"core", name:"观点与态度", color:"#A34E7E", soft:"#F0DCE7", cards:[
+    ["agree","/əˈɡriː/","v.","同意"],
+    ["disagree","/ˌdɪsəˈɡriː/","v.","不同意"],
+    ["approve","/əˈpruːv/","v.","赞成；批准"],
+    ["oppose","/əˈpəʊz/","v.","反对"],
+    ["doubt","/daʊt/","v./n.","怀疑"],
+    ["believe","/bɪˈliːv/","v.","相信；认为"],
+    ["consider","/kənˈsɪdə/","v.","认为；考虑"],
+    ["think","/θɪŋk/","v.","认为；思考"],
+    ["opinion","/əˈpɪnjən/","n.","观点；看法"],
+    ["view","/vjuː/","n.","看法；v. 看待"],
+    ["attitude","/ˈætɪtjuːd/","n.","态度"],
+    ["suggest","/səˈdʒest/","v.","建议；暗示"],
+    ["advise","/ədˈvaɪz/","v.","劝告；建议"],
+    ["warn","/wɔːn/","v.","警告；提醒"],
+    ["praise","/preɪz/","v./n.","表扬；赞扬"],
+    ["criticize","/ˈkrɪtɪsaɪz/","v.","批评；指责"],
+    ["positive","/ˈpɒzətɪv/","adj.","积极的；正面的"],
+    ["negative","/ˈneɡətɪv/","adj.","消极的；负面的"],
+    ["objective","/əbˈdʒektɪv/","adj.","客观的"],
+    ["subjective","/səbˈdʒektɪv/","adj.","主观的"],
+    ["neutral","/ˈnjuːtrəl/","adj.","中立的"],
+    ["optimistic","/ˌɒptɪˈmɪstɪk/","adj.","乐观的"],
+    ["pessimistic","/ˌpesɪˈmɪstɪk/","adj.","悲观的"],
+  ]},
+  { id:"time", group:"core", name:"时间与频率", color:"#5A7A9A", soft:"#DEE7EE", cards:[
+    ["time","/taɪm/","n.","时间；次数"],
+    ["moment","/ˈməʊmənt/","n.","时刻；瞬间"],
+    ["period","/ˈpɪəriəd/","n.","时期；周期"],
+    ["age","/eɪdʒ/","n.","时代；年龄"],
+    ["once","/wʌns/","adv.","一次；曾经"],
+    ["twice","/twaɪs/","adv.","两次"],
+    ["often","/ˈɒfn/","adv.","经常"],
+    ["usually","/ˈjuːʒuəli/","adv.","通常"],
+    ["sometimes","/ˈsʌmtaɪmz/","adv.","有时"],
+    ["seldom","/ˈseldəm/","adv.","很少；不常"],
+    ["rarely","/ˈreəli/","adv.","罕见地；很少"],
+    ["never","/ˈnevə/","adv.","从不"],
+    ["always","/ˈɔːlweɪz/","adv.","总是；一直"],
+    ["frequently","/ˈfriːkwəntli/","adv.","频繁地；经常"],
+    ["gradually","/ˈɡrædʒuəli/","adv.","逐渐地"],
+    ["suddenly","/ˈsʌdənli/","adv.","突然"],
+  ]},
+  { id:"logic", group:"core", name:"因果与逻辑", color:"#2F6B5E", soft:"#D7E7E1", cards:[
+    ["cause","/kɔːz/","v.","导致；n. 原因"],
+    ["reason","/ˈriːzn/","n.","理由；原因"],
+    ["result","/rɪˈzʌlt/","n.","结果；后果"],
+    ["effect","/ɪˈfekt/","n.","效果；影响"],
+    ["influence","/ˈɪnfluəns/","v./n.","影响"],
+    ["affect","/əˈfekt/","v.","影响；感染"],
+    ["lead to","/liːd tuː/","短语","导致；引起"],
+    ["because","/bɪˈkɒz/","conj.","因为"],
+    ["since","/sɪns/","conj.","因为；自从"],
+    ["therefore","/ˈðeəfɔː/","adv.","因此；所以"],
+    ["so","/səʊ/","conj.","所以；因此"],
+    ["thus","/ðʌs/","adv.","因而；从而"],
+    ["however","/haʊˈevə/","adv.","然而；可是"],
+    ["but","/bʌt/","conj.","但是"],
+    ["although","/ɔːlˈðəʊ/","conj.","虽然；尽管"],
+    ["unless","/ʌnˈles/","conj.","除非"],
+    ["if","/ɪf/","conj.","如果；是否"],
+  ]},
+  { id:"emotion", group:"core", name:"情感与心理", color:"#C25A74", soft:"#F2DCE2", cards:[
+    ["emotion","/ɪˈməʊʃn/","n.","情绪；情感"],
+    ["mood","/muːd/","n.","心情；情绪"],
+    ["excited","/ɪkˈsaɪtɪd/","adj.","兴奋的"],
+    ["surprised","/səˈpraɪzd/","adj.","惊讶的"],
+    ["sad","/sæd/","adj.","悲伤的"],
+    ["sadness","/ˈsædnəs/","n.","悲伤"],
+    ["fear","/fɪə/","n./v.","恐惧；害怕"],
+    ["afraid","/əˈfreɪd/","adj.","害怕的"],
+    ["worried","/ˈwʌrid/","adj.","担忧的"],
+    ["depressed","/dɪˈprest/","adj.","低落的；抑郁的"],
+    ["grateful","/ˈɡreɪtfl/","adj.","感激的"],
+    ["proud","/praʊd/","adj.","自豪的"],
+    ["ashamed","/əˈʃeɪmd/","adj.","羞愧的"],
+    ["shock","/ʃɒk/","n./v.","震惊；使震惊"],
+    ["relief","/rɪˈliːf/","n.","宽慰；解脱"],
+    ["confident","/ˈkɒnfɪdənt/","adj.","自信的"],
+    ["anxious","/ˈæŋkʃəs/","adj.","焦虑的"],
+    ["patient","/ˈpeɪʃnt/","adj.","耐心的；n. 病人"],
+    ["honest","/ˈɒnɪst/","adj.","诚实的"],
+    ["optimistic","/ˌɒptɪˈmɪstɪk/","adj.","乐观的"],
+    ["determined","/dɪˈtɜːmɪnd/","adj.","意志坚定的"],
+  ]},
+  { id:"money", group:"core", name:"金钱与财务", color:"#7A8A3E", soft:"#E7EBDB", cards:[
+    ["money","/ˈmʌni/","n.","钱"],
+    ["coin","/kɔɪn/","n.","硬币"],
+    ["note","/nəʊt/","n.","纸币；笔记"],
+    ["cost","/kɒst/","v.","花费；n. 成本"],
+    ["spend","/spend/","v.","花费（人作主语）"],
+    ["take","/teɪk/","v.","花费（it 作形式主语）"],
+    ["afford","/əˈfɔːd/","v.","负担得起"],
+    ["save","/seɪv/","v.","节约；存钱；拯救"],
+    ["borrow","/ˈbɒrəʊ/","v.","借入"],
+    ["lend","/lend/","v.","借出"],
+    ["debt","/det/","n.","债务"],
+    ["wealth","/welθ/","n.","财富"],
+    ["rich","/rɪtʃ/","adj.","富有的"],
+    ["poor","/pʊə/","adj.","贫穷的"],
+    ["salary","/ˈsæləri/","n.","薪水"],
+    ["wage","/weɪdʒ/","n.","工资"],
+    ["income","/ˈɪnkʌm/","n.","收入"],
+    ["expense","/ɪkˈspens/","n.","开支；费用"],
+  ]},
+  { id:"quantity", group:"core", name:"数量与程度", color:"#4E6E8E", soft:"#DDE5ED", cards:[
+    ["amount","/əˈmaʊnt/","n.","数量；数额"],
+    ["quantity","/ˈkwɒntəti/","n.","数量"],
+    ["number","/ˈnʌmbə/","n.","数目；数字"],
+    ["total","/ˈtəʊtl/","adj.","总的；n. 总数"],
+    ["major","/ˈmeɪdʒə/","adj.","主要的；重大的"],
+    ["minor","/ˈmaɪnə/","adj.","次要的；轻微的"],
+    ["enough","/ɪˈnʌf/","adj./adv.","足够的；足够地"],
+    ["adequate","/ˈædɪkwət/","adj.","充足的；足够的"],
+    ["insufficient","/ˌɪnsəˈfɪʃnt/","adj.","不足的；不够的"],
+    ["many","/ˈmeni/","adj.","许多（可数）"],
+    ["much","/mʌtʃ/","adj.","许多（不可数）"],
+    ["few","/fjuː/","adj.","很少（可数否定）"],
+    ["little","/ˈlɪtl/","adj.","很少（不可数否定）"],
+    ["several","/ˈsevrəl/","adj.","几个；数个"],
+    ["some","/sʌm/","adj.","一些；某些"],
+    ["all","/ɔːl/","adj./pron.","全部；所有"],
+    ["none","/nʌn/","pron.","全无；没有一个"],
+    ["most","/məʊst/","adj./adv.","大多数；最"],
+    ["least","/liːst/","adj./adv.","最少；最不"],
+  ]},
+  { id:"ability", group:"core", name:"行为与能力", color:"#C25A3E", soft:"#F5E0D8", cards:[
+    ["able","/ˈeɪbl/","adj.","能够；有能力的"],
+    ["ability","/əˈbɪləti/","n.","能力"],
+    ["capable","/ˈkeɪpəbl/","adj.","有能力的；能胜任的"],
+    ["can","/kæn/","modal v.","能够；可以"],
+    ["manage","/ˈmænɪdʒ/","v.","设法做到；管理"],
+    ["succeed","/səkˈsiːd/","v.","成功；达成"],
+    ["success","/səkˈses/","n.","成功"],
+    ["successful","/səkˈsesfl/","adj.","成功的"],
+    ["fail","/feɪl/","v.","失败；未能"],
+    ["failure","/ˈfeɪljə/","n.","失败"],
+    ["attempt","/əˈtempt/","v./n.","尝试；试图"],
+    ["try","/traɪ/","v.","尝试；努力"],
+    ["effort","/ˈefət/","n.","努力"],
+    ["challenge","/ˈtʃælɪndʒ/","n.","挑战；v. 质疑"],
+    ["overcome","/ˌəʊvəˈkʌm/","v.","克服；战胜"],
+    ["achieve","/əˈtʃiːv/","v.","实现；达成"],
+    ["achievement","/əˈtʃiːvmənt/","n.","成就；成绩"],
+  ]},
+  { id:"nature", group:"core", name:"自然与天地", color:"#3E9A6E", soft:"#DCEBE2", cards:[
+    ["nature","/ˈneɪtʃə/","n.","大自然；自然"],
+    ["weather","/ˈweðə/","n.","天气"],
+    ["climate","/ˈklaɪmət/","n.","气候"],
+    ["rain","/reɪn/","n./v.","雨；下雨"],
+    ["snow","/snəʊ/","n./v.","雪；下雪"],
+    ["wind","/wɪnd/","n.","风"],
+    ["sun","/sʌn/","n.","太阳"],
+    ["moon","/muːn/","n.","月亮"],
+    ["star","/stɑː/","n.","星星"],
+    ["earth","/ɜːθ/","n.","地球；大地"],
+    ["river","/ˈrɪvə/","n.","河流"],
+    ["sea","/siː/","n.","大海"],
+    ["mountain","/ˈmaʊntɪn/","n.","山"],
+    ["land","/lænd/","n.","陆地；土地"],
+    ["storm","/stɔːm/","n.","暴风雨；风暴"],
+    ["disaster","/dɪˈzɑːstə/","n.","灾难；灾害"],
+    ["flood","/flʌd/","n./v.","洪水；泛滥"],
+    ["drought","/draʊt/","n.","干旱"],
+  ]},
+  { id:"change", group:"core", name:"变化类", color:"#D99A3C", soft:"#F3E7D0", cards:[
+    ["change","/tʃeɪndʒ/","v./n.","改变；变化"],
+    ["vary","/ˈveəri/","v.","变化；改变"],
+    ["variety","/vəˈraɪəti/","n.","多样性；种类"],
+    ["various","/ˈveəriəs/","adj.","各种各样的"],
+    ["increase","/ˈɪŋkriːs/","v./n.","增加；增长"],
+    ["decrease","/ˈdiːkriːs/","v./n.","减少；下降"],
+    ["rise","/raɪz/","v.","上升；上涨"],
+    ["fall","/fɔːl/","v.","下降；落下"],
+    ["grow","/ɡrəʊ/","v.","增长；成长；种植"],
+    ["develop","/dɪˈveləp/","v.","发展；开发"],
+    ["improve","/ɪmˈpruːv/","v.","改善；提高"],
+    ["reduce","/rɪˈdjuːs/","v.","降低；减少"],
+    ["expand","/ɪkˈspænd/","v.","扩大；扩张"],
+    ["remain","/rɪˈmeɪn/","v.","保持；仍然是"],
+    ["stay","/steɪ/","v.","保持；停留"],
+    ["shift","/ʃɪft/","v./n.","转移；转变"],
+    ["transform","/trænsˈfɔːm/","v.","转变；改造"],
+    ["update","/ˌʌpˈdeɪt/","v./n.","更新；升级"],
+  ]},
+  { id:"moral", group:"core", name:"品质与道德", color:"#8E4E7E", soft:"#E9DCE6", cards:[
+    ["honest","/ˈɒnɪst/","adj.","诚实的"],
+    ["lazy","/ˈleɪzi/","adj.","懒惰的"],
+    ["brave","/breɪv/","adj.","勇敢的"],
+    ["wise","/waɪz/","adj.","明智的；聪明的"],
+    ["clever","/ˈklevə/","adj.","聪明的；机灵的"],
+    ["stupid","/ˈstjuːpɪd/","adj.","愚蠢的"],
+    ["generous","/ˈdʒenərəs/","adj.","慷慨的"],
+    ["selfish","/ˈselfɪʃ/","adj.","自私的"],
+    ["modest","/ˈmɒdɪst/","adj.","谦虚的"],
+    ["hard-working","/ˌhɑːd ˈwɜːkɪŋ/","adj.","勤奋的"],
+    ["determined","/dɪˈtɜːmɪnd/","adj.","意志坚定的"],
+    ["responsible","/rɪˈspɒnsəbl/","adj.","负责任的"],
+    ["polite","/pəˈlaɪt/","adj.","有礼貌的"],
+    ["rude","/ruːd/","adj.","粗鲁的"],
+    ["kind","/kaɪnd/","adj.","善良的；和蔼的"],
+    ["cruel","/ˈkruːəl/","adj.","残忍的"],
+  ]},
+  { id:"government", group:"core", name:"政府与政策", color:"#3E5A8E", soft:"#DDE3F0", cards:[
+    ["government","/ˈɡʌvənmənt/","n.","政府"],
+    ["policy","/ˈpɒləsi/","n.","政策；方针"],
+    ["law","/lɔː/","n.","法律；法规"],
+    ["rule","/ruːl/","n.","规定；v. 统治"],
+    ["protect","/prəˈtekt/","v.","保护"],
+    ["prevent","/prɪˈvent/","v.","预防；阻止"],
+    ["ban","/bæn/","v./n.","禁止；禁令"],
+    ["allow","/əˈlaʊ/","v.","允许；准许"],
+    ["permit","/pəˈmɪt/","v.","准许；n. 许可证"],
+    ["require","/rɪˈkwaɪə/","v.","要求；需要"],
+    ["demand","/dɪˈmɑːnd/","v./n.","要求；需求"],
+    ["public","/ˈpʌblɪk/","adj.","公共的；n. 公众"],
+    ["service","/ˈsɜːvɪs/","n.","公共服务；服务"],
+    ["security","/sɪˈkjʊərəti/","n.","安全；保障"],
+    ["welfare","/ˈwelfeə/","n.","福利；幸福"],
+  ]},
+];
+
+/* ============ 主题图标 ============ */
+const ICONS = {
+  months:"📅", cardinal:"🔢", ordinal:"🏅", countries:"🌍", weekdays:"📆", seasons:"🌦️", festivals:"🎉",
+  education:"🎓", environment:"🌿", health:"❤️", technology:"💻", transport:"🚌", economy:"🛒",
+  social:"👥", job:"💼", city:"🏙️", animal:"🐾", food:"🍎", sports:"⚽", media:"📰",
+  opinion:"💬", time:"⏰", logic:"🔗", emotion:"🎭", money:"💰", quantity:"📊", ability:"💪",
+  nature:"⛰️", change:"🔄", moral:"⚖️", government:"🏛️",
+};
+
+/* ============ 发音朗读 ============ */
+function speak(text){
+  if(!("speechSynthesis" in window)){ alert("当前浏览器不支持语音朗读"); return; }
+  const clean = String(text).replace(/\s*\/\s*/g," / ").replace(/\s+/g," ").trim();
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(clean);
+  const voices = speechSynthesis.getVoices();
+  const en = voices.find(v=>/^en(-GB|-US)?\b/i.test(v.lang)) || voices.find(v=>v.lang && v.lang.toLowerCase().startsWith("en"));
+  if(en) u.voice = en;
+  else u.lang = "en-US";
+  u.rate = 0.9;
+  speechSynthesis.speak(u);
+}
+["speakFront","speakBack"].forEach(id=>{
+  const b=document.getElementById(id);
+  if(b) b.addEventListener("click",e=>{ e.stopPropagation(); speak($("frontWord").textContent); });
+});
+
+/* ============ 每日学习进度 ============ */
+const LS_KEY = "englishFlashcards.daily";
+function dayKey(d){ return d.toISOString().slice(0,10); }
+function todayKey(){ return dayKey(new Date()); }
+function loadDaily(){
+  try{ return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
+  catch(e){ return {}; }
+}
+function saveDaily(obj){ localStorage.setItem(LS_KEY, JSON.stringify(obj)); }
+function bumpDaily(mastered){
+  const obj = loadDaily();
+  const k = todayKey();
+  if(!obj[k]) obj[k] = { review:0, mast:0 };
+  obj[k].review += 1;
+  if(mastered) obj[k].mast += 1;
+  saveDaily(obj);
+  renderDaily();
+}
+function renderDaily(){
+  const obj = loadDaily();
+  const t = todayKey();
+  const d = obj[t] || {review:0, mast:0};
+  $("dRev").textContent = d.review;
+  $("dMast").textContent = d.mast;
+  const catTotal = currentCat ? currentCat.cards.length : 0;
+  $("dLeft").textContent = Math.max(0, catTotal - d.mast);
+  const y = new Date(); y.setHours(12,0,0,0);
+  const wrap = $("bars"); wrap.innerHTML="";
+  for(let i=6;i>=0;i--){
+    const date = new Date(y); date.setDate(y.getDate()-i);
+    const key = dayKey(date);
+    const v = obj[key] ? obj[key].review : 0;
+    const day = document.createElement("div");
+    day.className = "day" + (key===t?" today":"");
+    const col = document.createElement("div");
+    col.className = "col";
+    const h = v===0 ? 3 : Math.min(30, 4 + v*4);
+    col.style.height = h+"px";
+    const w = document.createElement("span");
+    w.className="w";
+    const wd = ["日","一","二","三","四","五","六"][date.getDay()];
+    w.textContent = key===t ? "今" : wd;
+    day.appendChild(col); day.appendChild(w);
+    wrap.appendChild(day);
+  }
+  /* 更新每日复习卡片 */
+  const dueCount = reviewWordsToday().length;
+  $("reviewBadge").textContent = dueCount+" 词";
+  $("reviewSub").textContent = dueCount ? "今天有 "+dueCount+" 个单词需要复习，学新词前先过一遍" : "今天没有需要复习的单词";
+}
+
+/* ============ 状态 ============ */
+let currentGroup="base";
+let currentCat=null;
+let queue=[];
+let cur=null;
+let flipped=false;
+let doneCount=0;
+let onceCount=0;
+let reCount=0;
+let hardQueue=[];
+let autoSpeak=true;   // 自动朗读开关
+let sessionMode="normal"; // normal | hard | review
+let sessionTotal=0;   // 本次会话的初始卡片数
+
+/* ============ 主题掌握进度 ============ */
+const MAST_KEY="englishFlashcards.mastery";
+function loadMastery(){ try{ return JSON.parse(localStorage.getItem(MAST_KEY))||{}; }catch(e){ return {}; } }
+function saveMastery(o){ localStorage.setItem(MAST_KEY, JSON.stringify(o)); }
+function bumpMastery(catId){
+  const o=loadMastery();
+  o[catId]=(o[catId]||0)+1;
+  saveMastery(o);
+}
+
+/* ============ 艾宾浩斯遗忘曲线复习 ============ */
+const WORDS_KEY="englishFlashcards.words";
+const EB_INTERVALS=[1,2,4,7,15,30];   // 复习间隔（天）：学后第1、2、4、7、15、30天
+function wkey(catId,word){ return catId+"__"+word; }
+function addDays(iso,n){
+  const d=new Date(iso+"T12:00:00");
+  d.setDate(d.getDate()+n);
+  return d.toISOString().slice(0,10);
+}
+function loadWords(){ try{ return JSON.parse(localStorage.getItem(WORDS_KEY))||{}; }catch(e){ return {}; } }
+function saveWords(o){ localStorage.setItem(WORDS_KEY, JSON.stringify(o)); }
+/* 第一次"认识"该词时，登记进遗忘曲线：明天开始第一轮复习 */
+function addWord(catId,word){
+  const o=loadWords();
+  const k=wkey(catId,word);
+  if(!o[k]){ o[k]={stage:0, next:addDays(todayKey(),1)}; saveWords(o); }
+}
+/* 收集今天（及以前到期）需要复习的词 */
+function reviewWordsToday(){
+  const o=loadWords();
+  const t=todayKey();
+  const list=[];
+  for(const k in o){
+    const rec=o[k];
+    if(rec.finished) continue;
+    if(!rec.next || rec.next>t) continue;
+    const sep=k.lastIndexOf("__");
+    if(sep<=0) continue;
+    const catId=k.slice(0,sep), word=k.slice(sep+2);
+    const cat=CATS.find(c=>c.id===catId);
+    const card=cat?cat.cards.find(x=>x[0]===word):null;
+    if(cat&&card) list.push({cat, card, rec});
+  }
+  return list;
+}
+/* 复习评分后推进遗忘曲线：认识→间隔拉长；不认识/模糊→明天再来 */
+function applyReview(item, mastered){
+  const o=loadWords();
+  const k=wkey(item.cat.id, item.card[0]);
+  const rec=o[k];
+  if(!rec) return;
+  if(mastered){
+    rec.stage++;
+    if(rec.stage >= EB_INTERVALS.length){
+      rec.finished=true; rec.stage=EB_INTERVALS.length-1; rec.next=null;
+    } else {
+      rec.next=addDays(todayKey(), EB_INTERVALS[rec.stage]);
+    }
+  } else {
+    rec.stage=0; rec.next=addDays(todayKey(),1);
+  }
+  saveWords(o);
+}
+
+/* ============ 视图切换 ============ */
+function showPicker(){
+  document.getElementById("viewPicker").classList.remove("hidden");
+  document.getElementById("viewStudy").classList.add("hidden");
+  renderDaily();
+}
+function showStudy(){
+  document.getElementById("viewPicker").classList.add("hidden");
+  document.getElementById("viewStudy").classList.remove("hidden");
+  window.scrollTo({top:0});
+}
+
+/* ============ 分组切换 ============ */
+const groupBar=document.getElementById("groupBar");
+const GROUPS=[
+  {id:"base", name:"基础词汇", icon:"▦"},
+  {id:"core", name:"真题核心词", icon:"★"},
+];
+GROUPS.forEach(g=>{
+  const btn=document.createElement("button");
+  const cnt=CATS.filter(c=>c.group===g.id).length;
+  btn.className="gtab"+(g.id===currentGroup?" active":"");
+  btn.dataset.id=g.id;
+  btn.innerHTML=`<span>${g.icon}</span>${g.name}<span class="cnt">${cnt} 组</span>`;
+  btn.onclick=()=>switchGroup(g.id);
+  groupBar.appendChild(btn);
+});
+function syncGroupTabs(){
+  document.querySelectorAll(".gtab").forEach(el=>el.classList.toggle("active",el.dataset.id===currentGroup));
+}
+function switchGroup(gid){
+  currentGroup=gid;
+  syncGroupTabs();
+  renderGrid();
+}
+
+/* ============ 主题卡片网格 ============ */
+const catGrid=document.getElementById("catGrid");
+const gridNote=document.getElementById("gridNote");
+function renderGrid(){
+  catGrid.innerHTML="";
+  const list=CATS.filter(c=>c.group===currentGroup);
+  const gname = GROUPS.find(g=>g.id===currentGroup).name;
+  gridNote.textContent = gname + " · 共 " + list.length + " 个主题，选一个开始刷词";
+  const mast=loadMastery();
+  list.forEach(c=>{
+    const t=document.createElement("button");
+    t.className="tcard";
+    t.style.setProperty("--c",c.color);
+    t.style.setProperty("--soft",c.soft);
+    const m=mast[c.id]||0;
+    const pct=Math.min(100,Math.round(m/c.cards.length*100));
+    const C=2*Math.PI*15.5;
+    const offset=(C*(1-pct/100)).toFixed(1);
+    t.innerHTML=`<span class="tcard-icon">${ICONS[c.id]||"📘"}</span><span class="tcard-name">${c.name}</span><span class="tcard-num">${c.cards.length} 个词 · 已学 ${pct}%</span><svg class="ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.5"/><circle class="ring-fg" cx="18" cy="18" r="15.5" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${offset}"/></svg><span class="ring-num">${pct}%</span>`;
+    t.dataset.id=c.id;
+    t.onclick=()=>openStudy(c.id);
+    catGrid.appendChild(t);
+  });
+}
+
+/* ============ 会话 ============ */
+function openStudy(id){
+  const c=CATS.find(x=>x.id===id);
+  if(!c)return;
+  currentCat=c;
+  if(currentGroup!==c.group){
+    currentGroup=c.group;
+    syncGroupTabs();
+  }
+  showStudy();
+  startSession(c,"normal");
+}
+
+function startSession(cat, mode){
+  sessionMode = mode==="hard" ? "hard" : "normal";
+  let cards;
+  if(mode==="hard"){
+    cards = hardQueue.filter(q=>q.cat===cat.id).map(q=>q.card);
+  } else {
+    cards = cat.cards.slice();
+  }
+  for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]];}
+  queue = cards.map(card=>({card, cat, retried:0}));
+  sessionTotal = queue.length;
+  doneCount=0; onceCount=0; reCount=0;
+  if(mode==="hard") hardQueue=[];
+  document.getElementById("done").classList.remove("show");
+  document.getElementById("rating").classList.remove("show");
+  document.getElementById("ctrlHint").style.visibility="hidden";
+  document.getElementById("ctrlHint").style.opacity="0";
+  document.getElementById("stage").style.display="block";
+  setCatColor(cat.color, cat.soft);
+  showNext();
+}
+
+/* 每日复习会话：跨主题，词来自遗忘曲线到期列表 */
+function startReview(items){
+  sessionMode="review";
+  setCatColor("#1F7A6B","#D6E7E1");
+  queue = items.map(it=>({card:it.card, cat:it.cat, rec:it.rec, retried:0}));
+  sessionTotal = queue.length;
+  doneCount=0; onceCount=0; reCount=0; hardQueue=[];
+  document.getElementById("done").classList.remove("show");
+  document.getElementById("rating").classList.remove("show");
+  document.getElementById("ctrlHint").style.visibility="hidden";
+  document.getElementById("ctrlHint").style.opacity="0";
+  document.getElementById("stage").style.display="block";
+  showStudy();
+  showNext();
+}
+
+function setCatColor(color, soft){
+  document.documentElement.style.setProperty("--c",color);
+  document.documentElement.style.setProperty("--c-soft",soft);
+}
+
+/* ============ 显示卡片 ============ */
+const $=id=>document.getElementById(id);
+const card= $("card");
+
+function showNext(){
+  if(queue.length===0){ finish(); return; }
+  cur=queue.shift();
+  flipped=false;
+  card.classList.remove("flip");
+  fillCard(cur.card, cur.cat);
+  $("rating").classList.remove("show");
+  $("ctrlHint").style.visibility="hidden";
+  $("ctrlHint").style.opacity="0";
+  if(autoSpeak) speak(cur.card[0]);
+  updateProgress();
+}
+
+function fillCard(c, catArg){
+  const cat=catArg||currentCat;
+  $("frontTag").textContent=cat.name;
+  $("frontTag").style.setProperty("--c",cat.color);
+  $("frontWord").textContent=c[0];
+  $("backTag").textContent=cat.name;
+  $("backTag").style.setProperty("--c",cat.color);
+  $("backWord").textContent=c[0];
+  $("backIpa").textContent=c[1];
+  $("backMean").innerHTML=`<span class="pos">${c[2]}</span>${c[3]}`;
+  const extra=c[4];
+  if(extra){
+    $("backExtra").style.display="block";
+    $("backExtra").innerHTML=`国民 / 形容词：<b>${c[4]}</b> <i>${c[5]}</i><br>${c[6]}`;
+  } else {
+    $("backExtra").style.display="none";
+  }
+}
+
+function updateProgress(){
+  const total = queue.length + doneCount;
+  $("catLabel").textContent = sessionMode==="review" ? "今日复习" : currentCat.name;
+  $("progressText").textContent=doneCount+" / "+total;
+  $("remain").textContent=queue.length;
+  $("prog").style.width = total? (doneCount/total*100)+"%":"0%";
+}
+
+function flip(){
+  if(!cur)return;
+  if(!flipped){
+    flipped=true;
+    card.classList.add("flip");
+    $("rating").classList.add("show");
+    $("ctrlHint").style.visibility="visible";
+    $("ctrlHint").style.opacity="1";
+    $("ctrlHint").innerHTML="用 <b>1</b> 不认识 · <b>2</b> 模糊 · <b>3</b> 认识";
+  }
+}
+
+/* ============ 评分 ============ */
+function rate(v){
+  if(!cur||!flipped)return;
+  const c=cur.card;
+  if(v==="good"){
+    doneCount++; onceCount++;
+    bumpDaily(true);
+    if(sessionMode==="review"){
+      applyReview(cur, true);
+    } else {
+      bumpMastery(currentCat.id);
+      addWord(currentCat.id, c[0]);   // 第一次认识 → 进入遗忘曲线
+    }
+  } else {
+    reCount++;
+    bumpDaily(false);
+    if(sessionMode==="review"){
+      applyReview(cur, false);
+    } else {
+      if(!hardQueue.some(q=>q.cat===currentCat.id && q.card===c)) hardQueue.push({cat:currentCat.id,card:c});
+      queue.push({card:c, cat:currentCat, retried:cur.retried+1});
+    }
+  }
+  showNext();
+}
+
+function finish(){
+  $("stage").style.display="none";
+  $("rating").classList.remove("show");
+  const d=$("done");
+  d.classList.add("show");
+  const isRev = sessionMode==="review";
+  $("done").querySelector("h2").textContent = isRev ? "今日复习完成" : "本组复习完成";
+  $("done").querySelector("p").textContent = isRev ? "遗忘曲线的复习已跟上，可以开始学新词了。" : "做得很棒，继续保持。";
+  $("dTotal").textContent = sessionTotal;
+  $("dOnce").textContent = onceCount;
+  $("dRe").textContent = reCount;
+  $("againBest").style.display = isRev ? "none" : "";
+  $("progressText").textContent = sessionTotal + " / " + sessionTotal;
+  $("prog").style.width="100%";
+  renderDaily();
+}
+
+/* ============ 事件 ============ */
+card.addEventListener("click",()=>flip());
+document.addEventListener("keydown",e=>{
+  if(e.target.tagName==="INPUT")return;
+  const k=e.key;
+  if(k===" "||k==="Enter"){e.preventDefault();flip();}
+  else if(k==="1")rate("again");
+  else if(k==="2")rate("hard");
+  else if(k==="3")rate("good");
+});
+document.querySelectorAll(".rate").forEach(b=>b.addEventListener("click",()=>rate(b.dataset.v)));
+$("replay").addEventListener("click",()=>{
+  if(sessionMode==="review"){
+    const items=reviewWordsToday();
+    if(items.length===0){ alert("今日待复习的词都已过完，去学新词吧！"); showPicker(); return; }
+    startReview(items);
+  } else {
+    startSession(currentCat,"normal");
+  }
+});
+$("againBest").addEventListener("click",()=>{
+  if(hardQueue.length===0){alert("这一组你全都一次记住了，没有易错词，很棒！");return;}
+  startSession(currentCat,"hard");
+});
+$("reviewBtn").addEventListener("click",()=>{
+  const items=reviewWordsToday();
+  if(items.length===0){ alert("今天没有需要复习的单词，可以安心学新词啦！"); return; }
+  startReview(items);
+});
+$("backBtn").addEventListener("click",()=>showPicker());
+$("autoTgl").addEventListener("click",()=>{
+  autoSpeak=!autoSpeak;
+  $("autoTgl").classList.toggle("on",autoSpeak);
+  $("autoTgl").textContent = autoSpeak ? "🔊 自动读" : "🔇 手动";
+  $("autoTgl").title = autoSpeak ? "自动朗读开关" : "自动朗读开关（已关闭）";
+});
+
+/* 初始化：停留在选词视图，默认渲染基础词汇分组 */
+renderGrid();
+renderDaily();
+
+/* 语音列表异步加载，预取一次 */
+if("speechSynthesis" in window){
+  speechSynthesis.getVoices();
+  speechSynthesis.onvoiceschanged = ()=>speechSynthesis.getVoices();
+}
+</script>
+</body>
+</html>
