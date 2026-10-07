@@ -179,8 +179,6 @@
   }
   .speak:hover{background:var(--c-soft,var(--teal-soft));border-color:var(--c,var(--teal));color:var(--c,var(--teal));transform:scale(1.06)}
   .speak svg{width:19px;height:19px}
-  .back .speak{transform:rotateY(180deg)}
-  .back .speak:hover{transform:rotateY(180deg) scale(1.06)}
   /* 正面 */
   .front .big{text-align:center;margin:auto;font-weight:700;font-size:clamp(26px,6.5vw,44px);letter-spacing:.01em;line-height:1.2;word-break:break-word}
   .front .big small{display:block;font-size:.42em;font-weight:500;color:var(--ink-soft);margin-top:10px}
@@ -944,17 +942,23 @@ const ICONS = {
 };
 
 /* ============ 发音朗读 ============ */
-function speak(text){
-  if(!("speechSynthesis" in window)){ alert("当前浏览器不支持语音朗读"); return; }
-  const clean = String(text).replace(/\s*\/\s*/g," / ").replace(/\s+/g," ").trim();
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(clean);
-  const voices = speechSynthesis.getVoices();
-  const en = voices.find(v=>/^en(-GB|-US)?\b/i.test(v.lang)) || voices.find(v=>v.lang && v.lang.toLowerCase().startsWith("en"));
-  if(en) u.voice = en;
-  else u.lang = "en-US";
-  u.rate = 0.9;
-  speechSynthesis.speak(u);
+// 优先读取audio文件夹下mp3，找不到自动降级浏览器朗读
+async function speak(word){
+  if(!word) return;
+  // 音频路径，你的mp3放在仓库audio文件夹
+  const audioUrl = `./audio/${word}.mp3`;
+  const audio = new Audio(audioUrl);
+  try {
+    await audio.play();
+  } catch (err) {
+    // mp3不存在，自动使用浏览器朗读兜底
+    if(!("speechSynthesis" in window)){ alert("当前浏览器不支持语音朗读"); return; }
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(word);
+    u.lang = "en-US";
+    u.rate = 0.9;
+    speechSynthesis.speak(u);
+  }
 }
 ["speakFront","speakBack"].forEach(id=>{
   const b=document.getElementById(id);
