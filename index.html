@@ -134,12 +134,12 @@
     max-width:470px;margin:22px auto 14px;padding:0 24px;
     display:flex;align-items:center;justify-content:space-between;gap:12px;
   }
-  .back{
-    border:1px solid var(--line);background:var(--surface);border-radius:11px;
-    padding:8px 15px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;color:var(--ink-soft);
-    transition:all .15s ease;white-space:nowrap;
-  }
-  .back:hover{border-color:var(--teal);color:var(--teal)}
+  .back-btn{
+  border:1px solid var(--line);background:var(--surface);border-radius:11px;
+  padding:8px 15px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;color:var(--ink-soft);
+  transition:all .15s ease;white-space:nowrap;
+}
+  .back-btn:hover{border-color:var(--teal);color:var(--teal)}
   .study-cat{font-weight:700;font-size:15px}
   .study-count{font-size:13px;color:var(--ink-soft);white-space:nowrap}
   .study-count b{color:var(--ink);font-variant-numeric:tabular-nums}
@@ -306,7 +306,7 @@
 <!-- ===== 刷词视图 ===== -->
 <section class="view hidden" id="viewStudy">
   <div class="study-head">
-    <button class="back" id="backBtn">← 返回词库</button>
+    <button class="back-btn" id="backBtn">← 返回词库</button>
     <span class="study-cat" id="catLabel">—</span>
     <button class="auto-tgl on" id="autoTgl" title="自动朗读开关">🔊 自动读</button>
     <span class="study-count"><b id="progressText">0 / 0</b> · 待学 <b id="remain">0</b></span>
