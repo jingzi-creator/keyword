@@ -943,21 +943,28 @@ const ICONS = {
 
 /* ============ 发音朗读 ============ */
 // 优先读取audio文件夹下mp3，找不到自动降级浏览器朗读
+/* ============ 发音朗读：优先mp3，缺失自动降级浏览器朗读 ============ */
+// 文件名转换：与audio文件夹命名一致（取斜杠前、小写、去空格特殊字符）
+function mp3Key(text){
+  return String(text).split("/")[0].trim().toLowerCase().replace(/[^a-z]/g,"");
+}
+function ttsFallback(word){
+  if(!("speechSynthesis" in window)){ alert("当前浏览器不支持语音朗读"); return; }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(word);
+  u.lang = "en-US";
+  u.rate = 0.9;
+  speechSynthesis.speak(u);
+}
 async function speak(word){
   if(!word) return;
-  // 音频路径，你的mp3放在仓库audio文件夹
-  const audioUrl = `./audio/${word}.mp3`;
+  const audioUrl = `./audio/${mp3Key(word)}.mp3`;
   const audio = new Audio(audioUrl);
+  audio.onerror = function(){ ttsFallback(word); };  // 文件不存在 → 降级TTS
   try {
     await audio.play();
   } catch (err) {
-    // mp3不存在，自动使用浏览器朗读兜底
-    if(!("speechSynthesis" in window)){ alert("当前浏览器不支持语音朗读"); return; }
-    speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(word);
-    u.lang = "en-US";
-    u.rate = 0.9;
-    speechSynthesis.speak(u);
+    ttsFallback(word);  // 播放失败 → 降级TTS
   }
 }
 ["speakFront","speakBack"].forEach(id=>{
